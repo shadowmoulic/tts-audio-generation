@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.env
+.venv
+env/
+venv/
+static/audio/*.wav
+static/uploads/*
+!static/uploads/.gitkeep
+saved_scripts/*.txt
+node_modules/
+.DS_Store
+*.log
