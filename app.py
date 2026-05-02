@@ -51,6 +51,7 @@ groq_client = Groq(api_key=GROQ_API_KEY)
 
 class TextRequest(BaseModel):
     text: str
+    api_key: Optional[str] = None
 
 class GenerateRequest(BaseModel):
     text: str
@@ -63,6 +64,13 @@ async def startup_event():
 @app.post("/api/fix-tags")
 async def fix_tags(request: TextRequest):
     try:
+        # Use provided key or fallback to env
+        key = request.api_key or GROQ_API_KEY
+        if not key or key == "your_groq_api_key_here":
+            raise Exception("No valid Groq API Key found. Please provide one in the UI.")
+            
+        local_groq = Groq(api_key=key)
+        
         logger.info("Optimizing text for Coqui TTS...")
         prompt = (
             "You are a master scriptwriter for high-end AI narration. Your goal is to transform the input text "
@@ -77,7 +85,7 @@ async def fix_tags(request: TextRequest):
             f"Input Text: {request.text}"
         )
         
-        completion = groq_client.chat.completions.create(
+        completion = local_groq.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.7,

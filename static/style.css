@@ -24,7 +24,36 @@ body {
     min-height: 100vh;
 }
 
-.background-glow {
+.api-section {
+    margin-bottom: 2rem;
+}
+
+.api-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    backdrop-filter: blur(10px);
+}
+
+.api-card input {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 100%;
+    outline: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.icon-small {
+    width: 18px;
+    height: 18px;
+    color: var(--primary);
+}
     position: fixed;
     top: 0;
     left: 0;

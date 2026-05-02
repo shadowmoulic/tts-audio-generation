@@ -7,6 +7,7 @@ const btnClearConsole = document.getElementById('btn-clear-console');
 const audioPlayerContainer = document.getElementById('audio-player-container');
 const audioPlayer = document.getElementById('audio-player');
 const downloadLink = document.getElementById('download-link');
+const groqApiKeyInput = document.getElementById('groq-api-key');
 
 function log(message, type = 'info') {
     const line = document.createElement('div');
@@ -36,10 +37,13 @@ btnFixTags.addEventListener('click', async () => {
         btnFixTags.disabled = true;
         log('Sending request to Groq to fix tags...');
         
+        const apiKey = groqApiKeyInput.value.trim();
+        if (!apiKey) return log('Please enter your Groq API Key first.', 'error');
+
         const response = await fetch('/api/fix-tags', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text })
+            body: JSON.stringify({ text, api_key: apiKey })
         });
 
         if (!response.ok) {
