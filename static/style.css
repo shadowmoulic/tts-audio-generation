@@ -54,6 +54,7 @@ body {
     height: 18px;
     color: var(--primary);
 }
+.background-glow {
     position: fixed;
     top: 0;
     left: 0;
